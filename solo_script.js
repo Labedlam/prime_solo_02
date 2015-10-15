@@ -1,10 +1,10 @@
 // ! ! !
 // Three Bugs
 
-var arrayAtticus = ["Atticus", "2405", "47000", 3];
-var arrayJem = ["Jem", "62347", "63500", 4];
-var arrayBoo = ["Boo", "11435", "54000", 3];
-var arrayScout = ["Scout", "6243", "74750", 5];
+var arrayAtticus ={ name: "Atticus",employeeNumber:"2405", baseSalary:"47000",reviewScore:3};
+var arrayJem = {name:"Jem",employeeNumber: "62347", baseSalary:"63500",reviewScore: 4};
+var arrayBoo = {name:"Boo",employeeNumber: "11435", baseSalary:"54000",reviewScore: 3};
+var arrayScout = {name:"Scout", employeeNumber:"6243", baseSalary:"74750",reviewScore: 5};
 
 var array = [arrayAtticus, arrayJem, arrayBoo, arrayScout];
 
@@ -18,35 +18,41 @@ position = document.getElementById('content');
 for(var i = 0; i < array.length; i++){
 	array[i] = calculateSTI(array[i]);// Bug 1 found- index of the array to cycle through was not put in.
  	newEl = document.createElement('li');
-	newText = document.createTextNode(array[i]);
+	newText = document.createTextNode(newObject.prototype);
 	newEl.appendChild(newText);
 	position.appendChild(newEl);
 }
 
-function calculateSTI(array){
-  var newArray = [];
+function calculateSTI(object){
+    newObject = {};
 
-  newArray[0] = array[0];
+   newObject.name= array[i].name;
+  //console.log(newObject.name);
+  newObject.employeeNumber= array[i].employeeNumber;
+ //console.log(newObject.employeeNumber) ;
+  newObject.baseSalary= array[i].baseSalary;
+//console.log(newObject.baseSalary);
+  newObject.reviewScore= array[i].reviewScore;
+//console.log(newObject.reviewScore);
 
-  var employeeNumber = array[1];
-  var baseSalary = array[2];
-  var reviewScore = array[3];
 
-  var bonus = getBaseSTI(reviewScore) + getYearAdjustment(employeeNumber) - getIncomeAdjustment(baseSalary);
+  var bonus = getBaseSTI(newObject.reviewScore) + getYearAdjustment(newObject.employeeNumber) - getIncomeAdjustment(newObject.baseSalary);
   if(bonus > 0.13){
     bonus = 0.13;
   }
 
-  newArray[1] = bonus;
-  newArray[2] = Math.round(baseSalary * (1.0 + bonus));// add rounding to the sum of the problem
-  newArray[3] = baseSalary * bonus;
-  console.log(newArray[0] + ", " + newArray[1] + ", " + newArray[2] + ", " + newArray[3]);
-  return newArray;
+  newObject.bonus = bonus;
+  //console.log(newObject.bonus);
+  newObject.annualCompensation = Math.round(newObject.baseSalary * (1.0 + bonus));// add rounding to the sum of the problem
+  newObject.totalBonus = newObject.baseSalary * bonus;
+  console.log(newObject.name + ", " + newObject.bonus + ", " + newObject.annualCompensation + ", " + newObject.totalBonus);
+  return newObject;
+  
 }
-
+//console.log(array);
 function getBaseSTI(reviewScore){
   var basePercent;
-  switch(reviewScore){
+  switch(newObject.reviewScore){
     case 1:
       basePercent = 0;
       break;
@@ -70,9 +76,10 @@ function getBaseSTI(reviewScore){
 
 function getYearAdjustment(employeeNumber){
   var yearAdjustment = 0;
-  if(employeeNumber.length == 4){
+  if(newObject.employeeNumber.length == 4){  // this could be a potential issue. may need to put .array
     yearAdjustment = 0.05;
   }
+  //console.log(yearAdjustment);
   return yearAdjustment;
 }
 
